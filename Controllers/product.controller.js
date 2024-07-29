@@ -70,7 +70,7 @@ const productController = {
   },
   getOneProduct: async (req, res) => {
     try {
-      const product = await Product.find({ _id: req.params.id });
+      const product = await Product.findById(req.params.id);
       res.status(200).json({
         statusCode: '200',
         message: 'Get a product successfully',

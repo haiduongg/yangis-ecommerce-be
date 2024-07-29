@@ -7,9 +7,6 @@ const CategorySchema = new Schema(
             type: String,
             required: true,
         },
-        description: {
-            type: String,
-        },
         products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
     },
     { timestamps: true }
