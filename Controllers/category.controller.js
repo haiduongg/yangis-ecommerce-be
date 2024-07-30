@@ -9,7 +9,7 @@ const categoryController = {
 			res
 				.status(200)
 				.json({
-					status: '200',
+					status: 200,
 					message: 'Get all category successfully',
 					data: categories,
 				});
@@ -29,7 +29,7 @@ const categoryController = {
 			await newCategory.save();
 
 			res.status(200).json({
-				statusCode: '201',
+				status: 201,
 				message: 'New category successfully insert',
 			});
 		} catch (error) {

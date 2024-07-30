@@ -18,7 +18,7 @@ const productController = {
         totalProduct = products.length;
 
         return res.status(200).json({
-          statusCode: '200',
+          status: 200,
           message: 'Get products by name successfully',
           data: { totalProduct, products },
         });
@@ -34,7 +34,7 @@ const productController = {
         totalPage = Math.round(totalProduct / content) ?? 1;
 
         return res.status(200).json({
-          statusCode: '200',
+          status: 200,
           message: 'Get products successfully',
           data: { totalProduct, totalPage, products },
         });
@@ -51,7 +51,7 @@ const productController = {
         totalProduct = products.length;
 
         res.status(200).json({
-          statusCode: '200',
+          status: 200,
           message: 'Get products successfully',
           data: { totalProduct, products },
         });
@@ -60,7 +60,7 @@ const productController = {
       products = await Product.find();
       totalProduct = products.length;
       res.status(200).json({
-        statusCode: '200',
+        status: 200,
         message: 'Get all product successfully',
         data: { totalProduct, products },
       });
@@ -72,7 +72,7 @@ const productController = {
     try {
       const product = await Product.findById(req.params.id);
       res.status(200).json({
-        statusCode: '200',
+        status: 200,
         message: 'Get a product successfully',
         data: product,
       });
@@ -95,7 +95,7 @@ const productController = {
         await category.updateOne({ $push: { products: savedProduct._id } });
       }
       res.status(200).json({
-        statusCode: '201',
+        status: 201,
         message: 'New product successfully insert',
       });
     } catch (error) {
@@ -111,7 +111,7 @@ const productController = {
         throw createError.NotFound(`Product not found`);
       }
 
-      res.json({ statusCode: '200', message: 'Product successfully delete' });
+      res.json({ status: 200, message: 'Product successfully delete' });
     } catch (error) {
       next(error);
     }

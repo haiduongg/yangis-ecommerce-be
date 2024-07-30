@@ -9,7 +9,7 @@ const producerController = {
 			res
 				.status(200)
 				.json({
-					status: '200',
+					status: 200,
 					message: 'Get all producer successfully',
 					data: producers,
 				});
@@ -29,7 +29,7 @@ const producerController = {
 			await newProducer.save();
 
 			res.status(200).json({
-				statusCode: '201',
+				status: 101,
 				message: 'New producer successfully insert',
 			});
 		} catch (error) {
