@@ -68,7 +68,7 @@ const productController = {
       next(error);
     }
   },
-  getOneProduct: async (req, res) => {
+  getOneProduct: async (req, res, next) => {
     try {
       const product = await Product.findById(req.params.id);
       res.status(200).json({
