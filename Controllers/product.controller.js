@@ -126,7 +126,7 @@ const productController = {
         throw createError.NotFound(`Product not found`);
       }
 
-      res.json({ status: '200', message: 'Product successfully updated' });
+      res.json({ status: 200, message: 'Product successfully updated' });
     } catch (error) {
       next(error);
     }
