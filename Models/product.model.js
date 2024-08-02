@@ -7,10 +7,11 @@ const ProductSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		featureImage: {
+		thumbnail: {
 			type: String,
 			required: true,
 		},
+		featureImage: [{ type: String }],
 		selection: {
 			type: Schema.Types.Mixed,
 		},
