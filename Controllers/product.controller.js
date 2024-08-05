@@ -94,7 +94,7 @@ const productController = {
         const category = await Category.findById(req.body.category_id);
         await category.updateOne({ $push: { products: savedProduct._id } });
       }
-      res.status(200).json({
+      res.status(201).json({
         status: 201,
         message: 'New product successfully insert',
       });
