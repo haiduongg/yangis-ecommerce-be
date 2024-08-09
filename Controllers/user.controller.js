@@ -3,7 +3,7 @@ const createError = require('http-errors')
 const User = require('../Models/user.model')
 const Review = require('../Models/review.model')
 
-const { userValidate } = require('../helpers/validation')
+const { userValidate, authValidate } = require('../helpers/validation')
 const {
     signAccessToken,
     signRefreshToken,
@@ -36,18 +36,46 @@ const userController = {
             next(error)
         }
     },
+    checkExistAccount: async (req, res, next) => {
+        try {
+            const { email, username } = req.body
 
+            if (!email) {
+                throw createError.BadRequest()
+            }
+            if (!username) {
+                throw createError.BadRequest()
+            }
+            const isExist = await User.findOne({ email: req.body.email })
+            if (isExist) {
+                throw createError.Conflict(
+                    `${req.body.email} is ready been registered`
+                )
+            }
+        } catch (error) {
+            next(error)
+        }
+    },
     loginUser: async (req, res, next) => {
         try {
-            const { error } = userValidate(req.body)
+            const { error } = authValidate(req.body)
             if (error) {
                 throw createError(error.details[0].message)
             }
 
-            const user = await User.findOne({ username: req.body.username })
+            const { email, username } = req.body
+
+            let user
+            if (email) {
+                user = await User.findOne({ email: email })
+            }
+            if (username) {
+                user = await User.findOne({ username: username })
+            }
             if (!user) {
                 throw createError.NotFound(`User not registered`)
             }
+
             const isValid = await user.isCheckedPasswrod(req.body.password)
             if (!isValid) {
                 throw createError.Unauthorized()
